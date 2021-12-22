@@ -10,12 +10,13 @@
   function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
     console.log('statusChangeCallback');
     console.log(response); 
-    console.log(response.status);
-    console.log('Access Token: ' + response.authResponse.accessToken)  ;      // The current login status of the person.
+    console.log(response.status);  // The current login status of the person.
+    console.log('Access Token: ' + response.authResponse.accessToken);
     console.log('User ID: ' + response.authResponse.userID);
     if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-      testAPI();  
-    } else {                                 // Not logged into your webpage or we are unable to tell.
+      testAPI();
+      extendToken(response.authResponse.accessToken);
+    } else { // Not logged into your webpage or we are unable to tell.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this webpage.';
     }
@@ -51,6 +52,19 @@
         'Thanks for logging in, ' + response.name + '!';
     });
   }
+
+  function extendToken(shortToken) {
+    let url = "https://graph.facebook.com/{graph-api-version}/oauth/access_token?" +   
+    "grant_type=fb_exchange_token&" +           
+    "client_id=" + "595092014884636&"
+    "client_secret=" + "●●●●●●●●&"
+    "fb_exchange_token=" + shortToken
+
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
 
 </script>
 
