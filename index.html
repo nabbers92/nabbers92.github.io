@@ -7,22 +7,17 @@
     <title>Document</title>
 </head>
 <body>
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId            : 'your-app-id',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v12.0'
+          });
+        };
+      </script>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <h1>This is my web page</h1>
 </body>
-<script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId            : '595092014884636',
-        autoLogAppEvents : true,
-        xfbml            : true,
-        version          : 'v12.0'
-      });
-
-      FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-    });
-    };
-    
-    </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 </html>
